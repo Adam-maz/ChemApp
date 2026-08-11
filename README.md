@@ -195,30 +195,6 @@ run_chemapp.sh script and .ico file are also provided
 
 ---
 
-# 📁 Project Structure
-
-A possible project structure is:
-
-```text
-ChemApp/
-│
-├── ChemApp.py
-├── .streamlit
-├── converted_ligands
-├── docking_results
-├── chemapp_environment.yml
-├── ChemBERTaLM_module.py
-├── chembl_auto_ml.py
-├── docking_utils.py
-├── mol_format_converter.py
-├── run_chemapp.sh
-├── ml_model_dir
-```
-
-The exact structure depends on the current implementation of the project.
-
----
-
 # ⚠️ Limitations
 
 ChemApp is intended as a **computational research and educational tool** for virtual screening and early-stage drug discovery.
