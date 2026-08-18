@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import os
 from joblib import load
+from shutil import rmtree
 from supervised import AutoML
 from mol_format_converter import *
 from docking_utlis import *
@@ -27,6 +28,7 @@ from rdkit.Chem.rdMolDescriptors import (
 
 from rdkit.Chem.QED import default
 from rdkit.Chem.Crippen import MolLogP
+
 
 st.set_page_config(layout="wide", page_title="ChemApp", page_icon="🧪")
 st.header("ChemApp", divider="green")
@@ -427,13 +429,15 @@ elif sbar == 'Docking':
     with col9:
         format_converter_button = st.button('Convert ligands from smiles to .pdbqt')
         if format_converter_button:
+            temp_dir_path = os.path.join(os.getcwd(), "temp")
+            rmtree(temp_dir_path, ignore_errors=True)
             smiles2pdbqt(df)
             st.success('Molecules converted!')
 
     with col10:
-        grid_center_x = st.number_input('Specify grid center x coordinate', value=-42.83)
-        grid_center_y = st.number_input('Specify grid center y coordinate', value=-159.71)
-        grid_center_z = st.number_input('Specify grid center z coordinate', value=308.31)
+        grid_center_x = st.number_input('Specify grid center x coordinate', value=0.00)
+        grid_center_y = st.number_input('Specify grid center y coordinate', value=0.00)
+        grid_center_z = st.number_input('Specify grid center z coordinate', value=0.00)
         grid_size_x = st.number_input('Specify grid size x size', value=20)
         grid_size_y = st.number_input('Specify grid size y size', value=20)
         grid_size_z = st.number_input('Specify grid size z size', value=20)
@@ -454,7 +458,7 @@ else:
 
     st.subheader("Visual inspection")
 
-    uploaded_file_receptor = st.file_uploader("Choose receptor (.pdb)",type=["pdb"])
+    uploaded_file_receptor = st.file_uploader("Choose receptor (.pdbqt)",type=["pdbqt"])
     uploaded_file_ligand = st.file_uploader("Choose docking result ligand 1 (.pdbqt)", type=["pdbqt"])
     uploaded_file_ligand2 = st.file_uploader("Choose docking result ligand 2 (.pdbqt) - optional", type=["pdbqt"])
 

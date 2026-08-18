@@ -14,7 +14,7 @@ def perform_docking(receptor_file, list_of_grid_params, exhaustiveness, n_poses)
     v.compute_vina_maps(center=[list_of_grid_params[0], list_of_grid_params[1], list_of_grid_params[2]],
                         box_size=[list_of_grid_params[3], list_of_grid_params[4], list_of_grid_params[5]])
 
-    path_to_ligands = os.path.join(os.getcwd(), 'converted_ligands')
+    path_to_ligands = os.path.join(os.getcwd(), "temp")
     os.makedirs('docking_results', exist_ok=True)
 
     for lig in os.listdir(path_to_ligands):
