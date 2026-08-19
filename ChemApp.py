@@ -413,7 +413,7 @@ elif sbar == 'Molecular Descriptors':
                 st.dataframe(df)
 
 elif sbar == 'Docking':
-    target = st.text_input('Paste path receptor file (.pdbqt)')
+    target = st.file_uploader("Choose receptor (.pdbqt)",type=["pdbqt"])
     select_active_mols = st.radio('Select scope of molecules for docking', ['Only predicted as active ligands', 'All'])
     if 'df' not in st.session_state:
         st.warning("Upload compounds first")
