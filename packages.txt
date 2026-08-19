@@ -1,5 +1,4 @@
 openbabel
 libopenbabel-dev
-python3-openbabel
 swig
 build-essential
