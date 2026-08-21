@@ -413,7 +413,12 @@ elif sbar == 'Molecular Descriptors':
                 st.dataframe(df)
 
 elif sbar == 'Docking':
-    target = st.file_uploader("Choose receptor (.pdbqt)",type=["pdbqt"])
+    target = st.file_uploader(
+        "Wybierz receptor",
+        type=["pdbqt"]
+    )
+
+
     select_active_mols = st.radio('Select scope of molecules for docking', ['Only predicted as active ligands', 'All'])
     if 'df' not in st.session_state:
         st.warning("Upload compounds first")
@@ -448,11 +453,11 @@ elif sbar == 'Docking':
 
     docking_button = st.button('Run docking')
     if docking_button:
-        perform_docking(target,
+            perform_docking(target,
                         [grid_center_x, grid_center_y, grid_center_z, grid_size_x, grid_size_y, grid_size_z],
                         exhaustivness,
                         n_poses)
-        st.success('Docking completed!')
+            st.success('Docking completed!')
 
 else:
 

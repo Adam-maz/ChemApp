@@ -6,72 +6,31 @@ import streamlit.components.v1 as components
 from Bio.PDB import PDBParser, NeighborSearch
 import numpy as np
 import pandas as pd
-import tempfile #
+import tempfile
 
-# def perform_docking(receptor_file, list_of_grid_params, exhaustiveness, n_poses):
-#     v = Vina(verbosity=0)
-
-#     v.set_receptor(receptor_file)
-#     v.compute_vina_maps(center=[list_of_grid_params[0], list_of_grid_params[1], list_of_grid_params[2]],
-#                         box_size=[list_of_grid_params[3], list_of_grid_params[4], list_of_grid_params[5]])
-
-#     path_to_ligands = os.path.join(os.getcwd(), "temp")
-#     os.makedirs('docking_results', exist_ok=True)
-
-#     for lig in os.listdir(path_to_ligands):
-#         ligand_path = os.path.join(path_to_ligands, lig)
-#         v.set_ligand_from_file(ligand_path)
-#         v.dock(exhaustiveness=exhaustiveness, n_poses=n_poses)
-#         output_path = os.path.join(os.getcwd(),'docking_results', lig.split(".")[0])
-#         v.write_poses(f'{output_path}_vina_out.pdbqt', n_poses=n_poses, overwrite=True)
 
 def perform_docking(receptor_file, list_of_grid_params, exhaustiveness, n_poses):
     v = Vina(verbosity=0)
 
-    # receptor_file to UploadedFile
-    with tempfile.NamedTemporaryFile(
-        suffix=".pdbqt",
-        delete=False
-    ) as tmp:
+    with tempfile.NamedTemporaryFile(suffix=".pdbqt", delete=False) as tmp:
         tmp.write(receptor_file.getbuffer())
         receptor_path = tmp.name
 
     try:
         v.set_receptor(receptor_path)
-
-        v.compute_vina_maps(
-            center=list_of_grid_params[:3],
-            box_size=list_of_grid_params[3:6]
-        )
-
+        v.compute_vina_maps(center=list_of_grid_params[:3], box_size=list_of_grid_params[3:6])
         path_to_ligands = os.path.join(os.getcwd(), "temp")
         os.makedirs("docking_results", exist_ok=True)
 
         for lig in os.listdir(path_to_ligands):
             ligand_path = os.path.join(path_to_ligands, lig)
-
             v.set_ligand_from_file(ligand_path)
-            v.dock(
-                exhaustiveness=exhaustiveness,
-                n_poses=n_poses
-            )
-
-            output_path = os.path.join(
-                os.getcwd(),
-                "docking_results",
-                lig.split(".")[0]
-            )
-
-            v.write_poses(
-                f"{output_path}_vina_out.pdbqt",
-                n_poses=n_poses,
-                overwrite=True
-            )
+            v.dock(exhaustiveness=exhaustiveness, n_poses=n_poses)
+            output_path = os.path.join(os.getcwd(), "docking_results", lig.split(".")[0])
+            v.write_poses(f"{output_path}_vina_out.pdbqt", n_poses=n_poses, overwrite=True)
 
     finally:
-        # usunięcie tymczasowego pliku receptora
         os.unlink(receptor_path)
-
 
 
 def parse_pdbqt_poses(pdbqt_text):
