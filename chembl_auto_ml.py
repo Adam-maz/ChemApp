@@ -25,6 +25,7 @@ def retrieve_dataset_from_chembl(chembl_id: str):
     cols['type'] = [elem['type'] for elem in activities]
 
     df = pd.DataFrame(cols)
+    df = df.dropna(axis=0)
     df["standard_value"] = df["standard_value"].astype("float")
     df["standard_value"] = np.where(df["type"] == "IC50", df["standard_value"] * 0.5, df["standard_value"])
     df["type"] = "Ki"
