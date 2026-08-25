@@ -1,0 +1,4 @@
+openbabel
+libopenbabel-dev
+swig
+build-essential
