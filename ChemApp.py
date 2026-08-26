@@ -405,11 +405,13 @@ elif sbar == 'Molecular Descriptors':
         if calculate_button:
             with st.spinner("Calculating descriptors..."):
                 df = calculate_descriptors(df)
-                st.dataframe(df)
+                st.dataframe(df.drop(columns=['mol']))
+
     else:
         if calculate_button:
             with st.spinner("Calculating descriptors..."):
                 df = calculate_descriptors(df)
+                st.dataframe(df.drop(columns=['mol']))
 
 elif sbar == 'Docking':
     target = st.file_uploader("Select receptor", type=["pdbqt"])
@@ -422,7 +424,7 @@ elif sbar == 'Docking':
 
     if select_active_mols == 'Only predicted as active ligands':
         df = df[df['Predicted Label']==1]
-    st.dataframe(df)
+    st.dataframe(df.drop(columns=['mol']))
 
     col9, col10, col11 = st.columns(3)
     with col9:
