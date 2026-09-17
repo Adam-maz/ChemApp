@@ -11,7 +11,8 @@ The application integrates **machine learning, automated machine learning (AutoM
 
 ChemApp is primarily designed to run in a **Linux environment** and can also be used under **Windows Subsystem for Linux (WSL)**. For convenience, the application can be launched from Windows using a `.bat` script and a desktop shortcut.
 
-Scan QR code to launch app: <img width="410" height="410" alt="chemapp" src="https://github.com/user-attachments/assets/911f04f7-24ba-4f52-85e5-52444577ebd7" />
+Scan QR code to launch app:
+<img width="410" height="410" alt="chemapp" src="https://github.com/user-attachments/assets/911f04f7-24ba-4f52-85e5-52444577ebd7" />
 
 
 ---
