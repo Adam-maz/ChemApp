@@ -65,7 +65,7 @@ A user can enter an individual molecule using its **SMILES representation**.
 Example:
 
 ```text
-CCO
+Cc1n2[C@@H](COc3cccc(c23)c1C(=O)c4cccc5ccccc45)CN6CCOCC6
 ```
 
 The molecule is then processed and passed to the trained ML model.
@@ -78,10 +78,10 @@ For example:
 
 ```csv
 smiles,id
-CCO,cpd1
-CCN,cpd2
-c1ccccc1,cpd3
-CC(=O)Oc1ccccc1C(=O)O,cpd4
+Cc1n2[C@@H](COc3cccc(c23)c1C(=O)c4cccc5ccccc45)CN6CCOCC6,WIN 55
+CC(C)(C)[C@@H](CO)NC(=O)c1nn(c2c[n+]([O-])ccn2)c3[C@H]4C[C@H]4Cc13,Olorinab
+CC(C)CN1C(=O)CN(Cc2ccc(cc2)c3ccc(F)c(CNC4CCOCC4)n3)C1=O,LEI102
+Cc1c(nn(CCCCCO)c1c2ccccc2)C(=O)NC34CC5CC(CC(C5)C3)C4,AM10257
 ```
 
 This allows multiple compounds to be screened in a single workflow.
